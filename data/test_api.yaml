@@ -1,0 +1,25 @@
+-
+    feature: 用户管理模块
+    story: 获取access_token鉴权码接口
+    title: $ddt{title}
+    request :
+        url: https://api.weixin.qq.com/cgi-bin/token
+        method: get
+        headers :
+            ACCept : "*/*1"
+            Content-Type: application/json
+        params :
+            grant type: $ddt{grant type}
+            appid: $ddt{appid}
+            secret: $ddt{secret}
+    extract:
+        access_token: $.access_token
+
+    parametrize:
+        - ["title","grant type","appid","secret" ]
+        - ["测试grant type必填","wx6b11b3efd1cdc290","106a9c6157c4db5f6029918738f9529d"]
+        - ["获取鉴权access","wx6b11b3efd1cdc290","106a9c6157c4db5f6029918738f9529d"]
+
+    assert:
+        eq:
+        expires in: 7200
